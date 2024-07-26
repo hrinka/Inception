@@ -1,37 +1,15 @@
-# # ベースイメージとしてDebian Bullseyeを使用
-# FROM debian:bullseye
-
-# # 必要なパッケージのインストール
-# RUN apt-get update && apt-get install -y mariadb-server
-
-# # MariaDB 設定ファイルをコピー
-# # COPY my.cnf /etc/mysql/my.cnf
-
-# # 初期設定スクリプトをコンテナにコピー
-# COPY configure.sh /usr/local/bin/configure.sh
-
-# # データディレクトリの所有者をmysqlに設定
-# RUN chown -R mysql:mysql /var/lib/mysql
-
-# # MariaDBの初期化と設定を行うスクリプトをENTRYPOINTで実行
-# ENTRYPOINT ["sh", "/usr/local/bin/configure.sh"]
-
-# # MariaDBをフォアグラウンドで起動
-# CMD ["mysqld"]
-# mariadb/Dockerfile
 FROM debian:bullseye
 
 # 必要なパッケージのインストール
-RUN apt-get update && apt-get install -y mariadb-server
-
+RUN apt-get update && apt-get upgrade -y \
+    && apt-get install -y mariadb-server vim 
 # MariaDB 設定ファイルをコピー
-COPY my.cnf /etc/mysql/my.cnf
-
-# データディレクトリの所有者をmysqlに設定
-RUN chown -R mysql:mysql /var/lib/mysql
+COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/
 
 # 初期化スクリプトをコピー
-COPY configure.sh /usr/local/bin/configure.sh
+COPY ./tools/configure.sh /usr/local/bin/configure.sh
+RUN chmod +x /usr/local/bin/configure.sh
 
 # 初期化スクリプトを実行し、MariaDBを起動
 ENTRYPOINT ["sh", "/usr/local/bin/configure.sh"]
+# CMD ["bash"]

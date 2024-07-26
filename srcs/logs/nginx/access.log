@@ -87,3 +87,6 @@
 192.168.65.1 - - [22/Jul/2024:11:30:05 +0000] "GET /favicon.ico HTTP/1.1" 404 153 "http://localhost/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Safari/605.1.15"
 192.168.65.1 - - [22/Jul/2024:11:52:52 +0000] "GET / HTTP/1.1" 200 240 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
 192.168.65.1 - - [22/Jul/2024:11:52:52 +0000] "GET /favicon.ico HTTP/1.1" 404 555 "https://localhost/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+192.168.65.1 - - [26/Jul/2024:06:53:47 +0000] "GET / HTTP/1.1" 400 255 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Safari/605.1.15"
+192.168.65.1 - - [26/Jul/2024:06:58:33 +0000] "GET / HTTP/1.1" 200 240 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Safari/605.1.15"
+192.168.65.1 - - [26/Jul/2024:06:58:33 +0000] "GET /favicon.ico HTTP/1.1" 404 153 "https://hrinka.42.fr/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Safari/605.1.15"
