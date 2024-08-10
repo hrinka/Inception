@@ -2,18 +2,16 @@
 FROM debian:bullseye
 
 # 必要なパッケージのインストール
-RUN apt-get update && apt-get install -y \
+RUN apt-get update \
+    && apt-get install -y \
     nginx \
-    openssl 
+    openssl \
+    && rm -rf /var/lib/apt/lists/*
 
 # Nginx 設定ファイルをコピー
 COPY ./conf/nginx.conf /etc/nginx/nginx.conf
 COPY ssl /etc/nginx/ssl
-COPY html /usr/share/nginx/html
-# COPY ./default.conf /etc/nginx/conf.d/default.conf
+COPY ./tools/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
-# Nginx の実行に必要なディレクトリを作成
-RUN mkdir -p /run/nginx
-
-# Nginx をフォアグラウンドで起動
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["/entrypoint.sh"]
