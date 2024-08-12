@@ -1,19 +1,20 @@
 #!/bin/bash
 
 set -x
+cd /var/www/html/wordpress
 
 # 必要な権限の設定
-chown -R www-data:www-data /var/www/html
-chmod -R 755 /var/www/html
+chown -R www-data:www-data /var/www/html/wordpress
+chmod -R 755 /var/www/html/wordpress
 
 # wp-config.phpの存在確認と権限設定
-chown www-data:www-data /var/www/html/wp-config.php
-chmod 644 /var/www/html/wp-config.php
+chown www-data:www-data /var/www/html/wordpress/wp-config.php
+chmod 644 /var/www/html/wordpress/wp-config.php
 
-sed -i "s/WORDPRESS_DB_NAME/$WORDPRESS_DB_NAME/g" /var/www/html/wp-config.php
-sed -i "s/WORDPRESS_DB_USER/$WORDPRESS_DB_USER/g" /var/www/html/wp-config.php
-sed -i "s/WORDPRESS_DB_PASSWORD/$WORDPRESS_DB_PASSWORD/g" /var/www/html/wp-config.php
-sed -i "s/WORDPRESS_DB_HOST/$WORDPRESS_DB_HOST/g" /var/www/html/wp-config.php
+sed -i "s/WORDPRESS_DB_NAME/$WORDPRESS_DB_NAME/g" /var/www/html/wordpress/wp-config.php
+sed -i "s/WORDPRESS_DB_USER/$WORDPRESS_DB_USER/g" /var/www/html/wordpress/wp-config.php
+sed -i "s/WORDPRESS_DB_PASSWORD/$WORDPRESS_DB_PASSWORD/g" /var/www/html/wordpress/wp-config.php
+sed -i "s/WORDPRESS_DB_HOST/$WORDPRESS_DB_HOST/g" /var/www/html/wordpress/wp-config.php
 
 # cd /var/www/html
 wp core config --dbname=${WORDPRESS_DB_NAME} --dbuser=${WORDPRESS_DB_USER} --dbpass=${WORDPRESS_DB_PASSWORD} --dbhost=${WORDPRESS_DB_HOST} --allow-root

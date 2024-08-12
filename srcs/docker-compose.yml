@@ -52,7 +52,7 @@ volumes:
         driver: local
         driver_opts:
             # device: /Users/user/data/wordpress
-            device: "/Users/user/Inception/srcs/requirements/wordpress"
+            device: "/Users/user/42Tokyo/Inception/srcs/requirements/wordpress"
             o: bind
             type: none
 
@@ -60,7 +60,7 @@ volumes:
         driver: local
         driver_opts:
             # device: "/Users/user/data/mariadb"
-            device: "/Users/user/Inception/srcs/requirements/mariadb"
+            device: "/Users/user/42Tokyo/Inception/srcs/requirements/mariadb"
             o: "bind"
             type: "none"
 networks:
