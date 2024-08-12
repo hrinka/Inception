@@ -35,24 +35,16 @@ RUN apt-get update && apt-get install -y \
     php8.2-pdo \
     && rm -rf /var/lib/apt/lists/*
 
-# WordPressのインストールと設定
-# RUN mkdir -p /var/www/html/ \
-#     && cd /var/www/html/ \
-#     && wget https://wordpress.org/latest.tar.gz \
-#     && tar -xzvf latest.tar.gz --strip-components=1 \
-#     && rm latest.tar.gz \
-#     && chown -R www-data:www-data /var/www/html \
-#     && chmod -R 755 /var/www/html/conf
-RUN mkdir -p /var/www/html/wordpress
-WORKDIR /var/www/html/wordpress
-RUN wget https://wordpress.org/wordpress-latest.zip && \
-    unzip wordpress-latest.zip && \
-    rm wordpress-latest.zip && \
-    chown -R www-data:www-data /var/www/html/wordpress && \
-    chmod -R 755 /var/www/html/wordpress/
+# RUN mkdir -p /var/www/html/wordpress
+# WORKDIR /var/www/html/wordpress
+# RUN wget https://wordpress.org/wordpress-latest.zip && \
+#     unzip wordpress-latest.zip && \
+#     rm wordpress-latest.zip && \
+#     chown -R www-data:www-data /var/www/html/wordpress && \
+#     chmod -R 755 /var/www/html/
 
 # 必要な設定ファイルのコピー
-COPY ./conf/wp-config.php /var/www/html/wordpress/wp-config.php
+COPY ./conf/wp-config.php /var/www/html/wp-config.php
 COPY ./tools/entrypoint.sh /usr/local/bin/entrypoint.sh
 # RUN chown www-data:www-data /var/www/html/conf/wp-config.php && chmod 644 /var/www/html/conf/wp-config.php
 RUN chmod +x /usr/local/bin/entrypoint.sh

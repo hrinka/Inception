@@ -8,6 +8,11 @@ RUN apt-get update && apt-get upgrade -y \
 # MariaDB 設定ファイルをコピー
 COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/
 
+RUN mkdir -p /var/lib/mysql && \
+    chown -R mysql:mysql /var/lib/mysql && \
+    mkdir -p /run/mysqld && \
+    chown -R mysql:mysql /run/mysqld
+
 # 初期化スクリプトをコピー
 COPY ./tools/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
