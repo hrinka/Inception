@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # check env variables
-if [ -z "$MARIADB_ROOT_PASSWORD" -o -z "$WORDPRESS_DB_NAME" -o -z "$WORDPRESS_DB_USER" -o -z "$WORDPRESS_DB_PASSWORD" ]; then
+if [ -z "$MARIADB_PASSWORD" -o -z "$WORDPRESS_DB_NAME" -o -z "$WORDPRESS_DB_USER" -o -z "$WORDPRESS_DB_PASSWORD" ]; then
   echo "Error: Missing required environment variables."
   exit 1
 fi

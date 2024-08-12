@@ -5,11 +5,11 @@ services:
         build: ./requirements/nginx
         ports:
             - "443:443"
+            - "80:80"
         volumes:
-            - ./requirements/nginx/html:/usr/share/nginx/html
+            - wp-data:/var/www/html
             - ./requirements/nginx/conf/nginx.conf:/etc/nginx/nginx.conf
             - ./requirements/nginx/ssl:/etc/nginx/ssl
-            - ./logs/nginx:/var/log/nginx
         depends_on:
             - wordpress
         networks:
@@ -45,34 +45,22 @@ services:
             - inception
         restart: always
         ports:
-            - "3306"
-    # adminer:
-    #     container_name: adminer-container
-    #     image: adminer
-    #     build: ./requirements/bonus/adminer
-    #     ports:
-    #       - "600:80"
-    #     depends_on:
-    #       - mariadb
-    #     networks:
-    #       - frontend
-    #     #   - backend
-    #     restart: always
+            - "3306:3306"
 
 volumes:
     wp-data:
         driver: local
         driver_opts:
-            # device: /home/${USER}/data/wordpress
-            device: /Users/user/data/wordpress
+            # device: /Users/user/data/wordpress
+            device: "/Users/user/Inception/srcs/requirements/wordpress"
             o: bind
             type: none
 
     db-data:
         driver: local
         driver_opts:
-            # device: /home/${USER}/data/mariadb
-            device: "/Users/user/data/mariadb"
+            # device: "/Users/user/data/mariadb"
+            device: "/Users/user/Inception/srcs/requirements/mariadb"
             o: "bind"
             type: "none"
 networks:

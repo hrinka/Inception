@@ -10,7 +10,7 @@ RUN apt-get update \
 
 # Nginx 設定ファイルをコピー
 COPY ./conf/nginx.conf /etc/nginx/nginx.conf
-COPY ssl /etc/nginx/ssl
+# COPY ssl /etc/nginx/ssl
 COPY ./tools/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
