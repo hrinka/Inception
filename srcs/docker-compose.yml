@@ -50,16 +50,16 @@ volumes:
     wp-data:
         driver: local
         driver_opts:
-            device: "/home/hrinka/data/wordpress"
-            # device: "/Users/user/42Tokyo/Inception/srcs/requirements/wordpress"
+            # device: "/home/hrinka/data/wordpress"
+            device: "/tmp/data-wordpress"
             o: bind
             type: none
 
     db-data:
         driver: local
         driver_opts:
-            device: "/home/hrinka/data/mariadb"
-            # device: "/Users/user/42Tokyo/Inception/srcs/requirements/mariadb"
+            # device: "/home/hrinka/data/mariadb"
+            device: "/tmp/data-mariadb"
             o: "bind"
             type: "none"
 networks:
