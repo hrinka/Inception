@@ -6,22 +6,14 @@ set -x
 chown -R www-data:www-data /var/www/html
 chmod -R 755 /var/www/html
 
-# wp-config.phpの存在確認と権限設定
-# if [ ! -f /var/www/html/wp-config.php ]; then
-#   cp /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
-#   sed -i "s/database_name_here/$WORDPRESS_DB_NAME/g" /var/www/html/wp-config.php
-#   sed -i "s/username_here/$WP_ADMIN_USER/g" /var/www/html/wp-config.php
-#   sed -i "s/password_here/$WP_ADMIN_PWD/g" /var/www/html/wp-config.php
-#   sed -i "s/localhost/$WORDPRESS_DB_HOST/g" /var/www/html/wp-config.php
-# fi
-
 cd /var/www/html
 
 # WordPressのインストール
-if ! wp core is-installed --path=/var/www/html --allow-root; then
-  wp core download --path=/var/www/html --allow-root
-  wp core install --url=$DOMAIN_NAME --title=$WORDPRESS_TITLE --admin_user=$WP_ADMIN_USER --admin_password=$WP_ADMIN_PWD --admin_email=$WP_ADMIN_EMAIL --allow-root
-  wp user create $WP_USER $WP_USER_EMAIL --role=author --user_pass=$WP_USER_PWD --allow-root
+if ! $(wp core is-installed --allow-root --path='/var/www/html') ; then
+  wp core download --path='/var/www/html/wordpress' --allow-root
+  wp core config --dbname=$MARIADB_NAME --dbuser=$WP_USER --dbpass=$WP_USER_PWD --dbhost=$MARIADB_HOST --path=/var/www/html --allow-root
+  wp core install --path='/var/www/html' --url=$DOMAIN_NAME --title=$WORDPRESS_TITLE --admin_user=$WP_ADMIN_USER --admin_password=$WP_ADMIN_PWD --admin_email=$WP_ADMIN_EMAIL --allow-root
+  wp user create $WP_USER $WP_USER_EMAIL --role=author --user_pass=$WP_USER_PWD --path=/var/www/html --allow-root
 fi
 exec php-fpm8.2 -F
 

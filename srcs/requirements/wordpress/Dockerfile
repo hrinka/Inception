@@ -63,12 +63,11 @@ FROM debian:bullseye
 RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     lsb-release \
     ca-certificates \
-#     apt-transport-https \
-#     software-properties-common \
     gnupg \
     wget \
     unzip \
     curl \
+    sendmail \ 
 #     gettext-base \
 #     mlocate \
 #     procps \
@@ -99,20 +98,17 @@ RUN apt-get update && apt-get install -y \
     php8.2-pdo \
     && rm -rf /var/lib/apt/lists/*
 
-# # WordPressのインストールと設定
-RUN mkdir -p /var/www/html \
-    && cd /var/www/html \
-    && wget https://wordpress.org/latest.tar.gz \
-    && tar -xzvf latest.tar.gz \
-    && rm latest.tar.gz \
-    && chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html\
-    && find /var/www/html -type d -exec chmod 755 {} \; \
-    && find /var/www/html -type f -exec chmod 644 {} \;
+# # # WordPressのインストールと設定
+RUN mkdir -p /var/www/html
+#     && cd /var/www/html \
+#     && wget https://wordpress.org/latest.tar.gz \
+#     && tar -xzvf latest.tar.gz \
+#     && rm latest.tar.gz \
+#     && chown -R www-data:www-data /var/www/html \
+#     && chmod -R 755 /var/www/html
 
 # 必要な設定ファイルのコピー
-COPY ./conf/wp-config.php /var/www/html/wp-config.php
-# COPY ./conf/www.conf /etc/php/8.3/fpm/pool.d/www.conf
+# COPY ./conf/wp-config.php /var/www/html/wp-config.php
 COPY ./tools/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 

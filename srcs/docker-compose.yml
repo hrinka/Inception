@@ -33,6 +33,7 @@ services:
 
     mariadb:
         container_name: mariadb-container
+        hostname: mariadb-container
         tty: true
         build: ./requirements/mariadb
         image: mariadb

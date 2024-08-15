@@ -36,16 +36,16 @@
 
 // /** The database collate type. Don't change this if in doubt. */
 // define( 'DB_COLLATE', '' );
-define( 'DB_NAME', getenv('WORDPRESS_DB_NAME') );
+define( 'DB_NAME', getenv('MARIADB_NAME') );
 
 /** Database username */
-define( 'DB_USER', getenv('WP_ADMIN_USER'));
+define( 'DB_USER', getenv('WP_USER'));
 
 /** Database password */
-define( 'DB_PASSWORD', getenv('WP_ADMIN_PWD'));
+define( 'DB_PASSWORD', getenv('WP_USER_PWD'));
 
 /** Database hostname */
-define( 'DB_HOST', getenv('WORDPRESS_DB_HOST'));
+define( 'DB_HOST', getenv('MARIADB_HOST'));
 
 /** Database charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );
