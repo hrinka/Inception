@@ -18,34 +18,29 @@
  * @package WordPress
  */
 
-// ** Database settings - You can get this info from your web host ** //
-/** The name of the database for WordPress */
-// define( 'DB_NAME', $WORDPRESS_DB_NAME );
+// // ** Database settings - You can get this info from your web host ** //
+// /** The name of the database for WordPress */
+define( 'DB_NAME', 'my_database' );
+
+/** MySQL database username */
+define( 'DB_USER', 'my_user' );
+
+/** MySQL database password */
+define( 'DB_PASSWORD', 'my_password' );
+
+/** MySQL hostname */
+define( 'DB_HOST', 'mariadb-container' );
+
+// define( 'DB_NAME', getenv('MARIADB_NAME') );
 
 // /** Database username */
-// define( 'DB_USER', $WP_ADMIN_USER);
+// define( 'DB_USER', getenv('WP_USER'));
 
 // /** Database password */
-// define( 'DB_PASSWORD', $WP_ADMIN_PWD);
+// define( 'DB_PASSWORD', getenv('WP_USER_PWD'));
 
 // /** Database hostname */
-// define( 'DB_HOST', $WORDPRESS_DB_HOST);
-
-// /** Database charset to use in creating database tables. */
-// define( 'DB_CHARSET', 'utf8' );
-
-// /** The database collate type. Don't change this if in doubt. */
-// define( 'DB_COLLATE', '' );
-define( 'DB_NAME', getenv('MARIADB_NAME') );
-
-/** Database username */
-define( 'DB_USER', getenv('WP_USER'));
-
-/** Database password */
-define( 'DB_PASSWORD', getenv('WP_USER_PWD'));
-
-/** Database hostname */
-define( 'DB_HOST', getenv('MARIADB_HOST'));
+// define( 'DB_HOST', getenv('MARIADB_HOST'));
 
 /** Database charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );
@@ -109,4 +104,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /** Sets up WordPress vars and included files. */
-require_once ABSPATH . 'wp-settings.php';
+require_once (ABSPATH . 'wp-settings.php');

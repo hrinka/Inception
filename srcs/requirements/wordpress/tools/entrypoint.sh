@@ -6,14 +6,12 @@ set -x
 chown -R www-data:www-data /var/www/html
 chmod -R 755 /var/www/html
 
-cd /var/www/html
-
 # WordPressのインストール
 if ! $(wp core is-installed --allow-root --path='/var/www/html') ; then
-  wp core download --path='/var/www/html/wordpress' --allow-root
-  wp core config --dbname=$MARIADB_NAME --dbuser=$WP_USER --dbpass=$WP_USER_PWD --dbhost=$MARIADB_HOST --path=/var/www/html --allow-root
+  wp core download --path='/var/www/html' --allow-root
+  wp core config --path='/var/www/html' --dbname=$MARIADB_NAME --dbuser=$WP_USER --dbpass=$WP_USER_PWD --dbhost=$MARIADB_HOST --allow-root
   wp core install --path='/var/www/html' --url=$DOMAIN_NAME --title=$WORDPRESS_TITLE --admin_user=$WP_ADMIN_USER --admin_password=$WP_ADMIN_PWD --admin_email=$WP_ADMIN_EMAIL --allow-root
-  wp user create $WP_USER $WP_USER_EMAIL --role=author --user_pass=$WP_USER_PWD --path=/var/www/html --allow-root
+  wp user create $WP_USER $WP_USER_EMAIL --role=author --user_pass=$WP_USER_PWD --path='/var/www/html' --allow-root
 fi
 exec php-fpm8.2 -F
 
@@ -35,10 +33,10 @@ exec php-fpm8.2 -F
 # chown www-data:www-data /var/www/html/wp-config.php
 # chmod 644 /var/www/html/wp-config.php
 
-# # sed -i "s/WORDPRESS_DB_NAME/$WORDPRESS_DB_NAME/g" /var/www/html/wp-config.php
+# # sed -i "s_DB_NAME/$WORDPRESS_DB_NAME/g" /var/www/html/wp-config.php
 # # sed -i "s/WP_ADMIN_USER/$WP_ADMIN_USER/g" /var/www/html/wp-config.php
 # # sed -i "s/WP_ADMIN_PWD/$WP_ADMIN_PWD/g" /var/www/html/wp-config.php
-# # sed -i "s/WORDPRESS_DB_HOST/$WORDPRESS_DB_HOST/g" /var/www/html/wp-config.php
+# # sed -i "s_DB_HOST/$WORDPRESS_DB_HOST/g" /var/www/html/wp-config.php
 
 # wp core download --path=/var/www/html --allow-root
 # wp core config --dbname=${WORDPRESS_DB_NAME} --dbuser=${WP_ADMIN_USER} --dbpass=${WP_ADMIN_PWD} --dbhost=${WORDPRESS_DB_HOST} --path=/var/www/html --allow-root
